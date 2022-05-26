@@ -1,3 +1,3 @@
-module github.com/yulin-physics/bitwise-operations
+module github.com/yulin-physics/bitop
 
 go 1.18

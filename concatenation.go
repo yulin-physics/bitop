@@ -1,6 +1,8 @@
-package main
+package bitop
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // concatenate binary A B at each corresponding bit
 // visualise each bit as a cell in row, concatenate each column
