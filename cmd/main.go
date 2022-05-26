@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	a := bitop.ContainsZero(0b111)
+	a := bitop.LastIndexOfZero(0b000111100)
 	fmt.Println(a)
 }
