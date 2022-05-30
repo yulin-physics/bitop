@@ -66,3 +66,15 @@ func ClearFromRight(b uint, index int) uint {
 func TruncateFromLeft(b uint, index int) uint {
 	return b &^ ((1<<index - 1) << (bits.Len(b) - index))
 }
+
+// RemoveBit returns the binary with the bit at index removed, length of the binary decreases by one
+func RemoveBit(b uint, index int) uint {
+	temp := uint(0)
+	for i := 0; i < bits.Len(b); i++ {
+		if i == index {
+			continue
+		}
+		temp = temp<<1 | b>>(bits.Len(b)-i-1)&1
+	}
+	return temp
+}
