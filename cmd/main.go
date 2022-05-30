@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	a := bitop.ClearFromRight(0b111111100, 3)
+	a := bitop.TruncateFromLeft(0b111100, 3)
 	fmt.Printf("%2b", a)
 }

@@ -46,18 +46,23 @@ func LastIndexOfZero(b uint) int {
 	return -1
 }
 
-// SplitAt returns the binary argument in two halves at the index specified [0, index), ignoring leading zero bits
+// SplitAt returns the binary argument in two halves at the index specified [0, index), excluding leading zero bits
 func SplitAt(b uint, index int) []uint {
 	firstHalf := uint(0) | b>>(bits.Len(b)-index)
 	return []uint{firstHalf, b ^ (firstHalf << (bits.Len(b) - index))}
 }
 
-// TruncateFromRight returns the binary truncated up to the index from the right, exclusive of the index upper bound
+// TruncateFromRight returns the binary truncated up to the index from the right, exclusive of the index
 func TruncateFromRight(b uint, index int) uint {
 	return b >> index
 }
 
-// ClearFromRight returns the binary bits set to zero up to the index from the right, exclusive of the index upper bound
+// ClearFromRight returns the binary bits set to zero up to the index from the right, exclusive of the index
 func ClearFromRight(b uint, index int) uint {
 	return b &^ (1<<index - 1)
+}
+
+// TruncateFromLeft returns binary truncated up to the index from the left, exclusive of the index
+func TruncateFromLeft(b uint, index int) uint {
+	return b &^ ((1<<index - 1) << (bits.Len(b) - index))
 }
