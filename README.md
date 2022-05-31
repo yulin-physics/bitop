@@ -1,6 +1,8 @@
 # Bit Operations in Go
 
-This bit operations library mimicks the functions of Go strings library, for learning purposes only.
+This bit operations library mimicks the functions of Go strings library.
+
+For learning purposes only, use at your own risk.
 
 ## Contains
 
@@ -9,6 +11,8 @@ This bit operations library mimicks the functions of Go strings library, for lea
 `func ContainsZero(b uint)`
 
 Checks if the argument has at least one bit that is one (or zero)
+
+palindrome symmetry checker
 
 ## Last Index
 
@@ -24,9 +28,23 @@ Finds the index of the last bit one (or zero) of the argument counting from left
 
 Splits the binary in two at the index, returns the 2 sub-binaries
 
+## Join
+
 ## Trim
 
-## Join
+`func TruncateFromRight(b uint, index int) `
+
+`func TruncateFromLeft(b uint, index int)`
+
+Truncate functions trim off bits from left (or right), up to but not including the index
+
+`func ClearFromRight(b uint, index int) `
+
+Clear preserves the binary length and resets the bits from right to zero, up to but not including the index
+
+`func RemoveBit(b uint, index int)`
+
+RemoveBit removes the bit at the index from the binary.
 
 ## Repeat
 
