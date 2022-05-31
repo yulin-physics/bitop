@@ -78,3 +78,28 @@ func RemoveBit(b uint, index int) uint {
 	}
 	return temp
 }
+
+// Join returns a single binary by combining all binary values together separated by the given separator
+// 0b0 is equivalent to no separator because leading zeros are omitted
+func Join(bs []uint, sep uint) uint {
+	joined := uint(0)
+	for i, b := range bs {
+		joined = joined<<bits.Len(b) | b
+		if i == len(bs)-1 {
+			break
+		}
+		joined = joined<<bits.Len(sep) | sep
+	}
+	return joined
+}
+
+// ColumnJoin joins the binary values in each corresponding bit position to form columns
+func ColumnJoin(rows []uint, colLen int) []uint {
+	cols := make([]uint, colLen)
+	for i := 1; i <= colLen; i++ {
+		for j := 0; j < len(rows); j++ {
+			cols[i-1] = cols[i-1]<<1 | rows[j]>>(colLen-i)&1
+		}
+	}
+	return cols
+}

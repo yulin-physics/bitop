@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	a := bitop.RemoveBit(0b1111000, 3)
-	fmt.Printf("%2b", a)
+	a := bitop.ColumnJoin([]uint{0b001101, 0b11111}, 6)
+	fmt.Printf("%02b", a)
 }
