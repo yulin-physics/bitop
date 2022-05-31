@@ -59,3 +59,14 @@ func Join(bs []uint, sep uint) uint {
 	}
 	return joined
 }
+
+// ColumnJoin joins the binary values in each corresponding bit position to form columns
+func ColumnJoin(rows []uint, colLen int) []uint {
+	cols := make([]uint, colLen)
+	for i := 1; i <= colLen; i++ {
+		for j := 0; j < len(rows); j++ {
+			cols[i-1] = cols[i-1]<<1 | rows[j]>>(colLen-i)&1
+		}
+	}
+	return cols
+}
