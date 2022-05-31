@@ -30,6 +30,16 @@ Splits the binary in two at the index, returns the 2 sub-binaries
 
 ## Join
 
+`func Join(bs []uint, sep uint)`
+
+Join combines the binary values into one, separated by the given delimiter
+
+`func ColumnJoin(rows []uint, colLen int)`
+
+ColumnJoin combines the binary values in each corresponding bit position, forming array of columns
+
+colLen is usually the bit length of an element in rows, but since leading zeroes are ommited, user needs to specify the bit length
+
 ## Trim
 
 `func TruncateFromRight(b uint, index int) `
@@ -44,14 +54,7 @@ Clear preserves the binary length and resets the bits from right to zero, up to 
 
 `func RemoveBit(b uint, index int)`
 
-RemoveBit removes the bit at the index from the binary.
-
-`func Join(bs []uint, sep uint)`
-Join combines the binary values into one, separated by the given delimiter
-
-`func ColumnJoin(rows []uint, colLen int)`
-ColumnJoin combines the binary values in each corresponding bit position, forming array of columns
-colLen is usually the bit length of an element in rows, but since leading zeroes are ommited, user needs to specify the bit length.
+RemoveBit removes the bit at the index from the binary
 
 ## Repeat
 
