@@ -45,3 +45,17 @@ func LastIndexOfZero(b uint) int {
 	}
 	return -1
 }
+
+// Join returns a single binary by combining all binary values together separated by the given separator
+// 0b0 is equivalent to no separator because leading zeros are omitted
+func Join(bs []uint, sep uint) uint {
+	joined := uint(0)
+	for i, b := range bs {
+		joined = joined<<bits.Len(b) | b
+		if i == len(bs)-1 {
+			break
+		}
+		joined = joined<<bits.Len(sep) | sep
+	}
+	return joined
+}

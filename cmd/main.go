@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	a := bitop.LastIndexOfZero(0b000111100)
-	fmt.Println(a)
+	a := bitop.Join([]uint{0b000111100, 0b1}, 0b1)
+	fmt.Printf("%02b",a)
 }
