@@ -46,6 +46,15 @@ func LastIndexOfZero(b uint) int {
 	return -1
 }
 
+// GetBitAtIndex returns the bit at index `ind` of the given binary, index counting from left to right from zero as usual
+// `Leng` is an optional argument to specify the exact length of the binary including leading zeroes
+func GetBitAtIndex(b uint, ind uint, leng int) uint {
+	if leng == -1 {
+		leng = bits.Len(b)
+	}
+	return b >> (uint(leng) - ind - 1) & 1
+}
+
 // SplitAt returns the binary argument in two halves at the index specified [0, index), excluding leading zero bits
 func SplitAt(b uint, index int) []uint {
 	firstHalf := uint(0) | b>>(bits.Len(b)-index)
@@ -103,3 +112,13 @@ func ColumnJoin(rows []uint, colLen int) []uint {
 	}
 	return cols
 }
+
+// Repeat returns a binary that is a repetition of the given bit pattern `b`, with length of the repeated unit `leng` (since leading zeroes would be ignored otherwise) and number of repetitions `count`
+func Repeat(b uint, leng int, count int) uint {
+	combined := uint(0)
+	for i := 0; i < count; i++ {
+		combined = combined<<leng | b
+	}
+	return combined
+}
+

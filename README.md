@@ -18,9 +18,15 @@ palindrome symmetry checker
 
 `func LastIndexOfOne(b uint)`
 
-`func LastIndexOfOne(b uint)`
+`func LastIndexOfZero(b uint)`
 
 Finds the index of the last bit one (or zero) of the argument counting from left to right
+
+## GetBitAtIndex
+
+`func GetBitAtIndex(b uint, ind uint, leng int)`
+
+Finds the bit at index ind, length of binary is optional and can be skipped by inserting -1
 
 ## Split
 
@@ -58,4 +64,12 @@ RemoveBit removes the bit at the index from the binary
 
 ## Repeat
 
+`func Repeat(b uint, leng int, count int)`
+Repeat constructs a binary based on a given repeating bit pattern
+
 ## Replace
+
+## Resources
+
+- [How to Use a Private Go Module in Your Own Project](https://www.digitalocean.com/community/tutorials/how-to-use-a-private-go-module-in-your-own-project)
+- [Publishing Go Modules](https://go.dev/blog/publishing-go-modules)
