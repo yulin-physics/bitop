@@ -24,6 +24,10 @@ Finds the index of the last bit one (or zero) of the argument counting from left
 
 ## GetBitAtIndex
 
+`func GetBitAtIndex(b uint, ind uint, leng int)`
+
+Finds the bit at index ind, length of binary is optional and can be skipped by inserting -1
+
 ## Split
 
 `func SplitAt(b uint, index int)`
