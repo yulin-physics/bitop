@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	a := bitop.Repeat(0b01, 3, 2)
+	a := bitop.GetBitAtIndex(0b0101, 1, 4)
 	fmt.Printf("%02b", a)
 }

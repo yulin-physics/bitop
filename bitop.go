@@ -46,7 +46,14 @@ func LastIndexOfZero(b uint) int {
 	return -1
 }
 
-// func GetBitAtIndex(b uint, ind int, )
+// GetBitAtIndex returns the bit at index `ind` of the given binary, index counting from left to right from zero as usual
+// `Leng` is an optional argument to specify the exact length of the binary including leading zeroes
+func GetBitAtIndex(b uint, ind uint, leng int) uint {
+	if leng == -1 {
+		leng = bits.Len(b)
+	}
+	return b >> (uint(leng) - ind - 1) & 1
+}
 
 // SplitAt returns the binary argument in two halves at the index specified [0, index), excluding leading zero bits
 func SplitAt(b uint, index int) []uint {
