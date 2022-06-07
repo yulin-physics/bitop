@@ -65,9 +65,14 @@ RemoveBit removes the bit at the index from the binary
 ## Repeat
 
 `func Repeat(b uint, leng int, count int)`
+
 Repeat constructs a binary based on a given repeating bit pattern
 
 ## Replace
+
+`func Replace(b uint, old uint, new uint, n int, leng int, oldLeng int, newLeng int)`
+
+Replace constructs a new binary with the old sub bits replaced by the new up to n times
 
 ## Resources
 

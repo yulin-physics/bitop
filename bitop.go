@@ -140,7 +140,7 @@ func Repeat(b uint, count int, leng int) uint {
 	return combined
 }
 
-// Replace returns a modified binary with any old bit pattern replaced by new, up to n times of occurrences
+// Replace returns a binary with any old bit pattern replaced by new, up to n times of occurrences
 // leng, oldLeng, newLeng are optional properties for b, old, new, to account for leading zeroes
 func Replace(b uint, old uint, new uint, n int, leng int, oldLeng int, newLeng int) uint {
 	if leng < 0 {
