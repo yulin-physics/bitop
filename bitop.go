@@ -66,16 +66,25 @@ func SplitAt(b uint, index int, leng int) []uint {
 
 // TruncateFromRight returns the binary truncated up to the index from the right, exclusive of the index
 func TruncateFromRight(b uint, pos int) uint {
+	if pos < 0 {
+		return b
+	}
 	return b >> pos
 }
 
 // ClearFromRight returns the binary bits set to zero up to the index from the right, exclusive of the index
 func ClearFromRight(b uint, index int) uint {
+	if index < 0 {
+		return b
+	}
 	return b &^ (1<<index - 1)
 }
 
 // TruncateFromLeft returns binary truncated up to the index from the left, exclusive of the index; excluding leading zero bits if leng is -1
 func TruncateFromLeft(b uint, index int, leng int) uint {
+	if index < 0 {
+		return b
+	}
 	if leng < 0 {
 		leng = bits.Len(b)
 	}
@@ -131,6 +140,8 @@ func Repeat(b uint, count int, leng int) uint {
 	return combined
 }
 
+// Replace returns a modified binary with any old bit pattern replaced by new, up to n times of occurrences
+// leng, oldLeng, newLeng are optional properties for b, old, new, to account for leading zeroes
 func Replace(b uint, old uint, new uint, n int, leng int, oldLeng int, newLeng int) uint {
 	if leng < 0 {
 		leng = bits.Len(b)
