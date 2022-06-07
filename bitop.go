@@ -55,10 +55,13 @@ func GetBitAtIndex(b uint, ind uint, leng int) uint {
 	return b >> (uint(leng) - ind - 1) & 1
 }
 
-// SplitAt returns the binary argument in two halves at the index specified [0, index), excluding leading zero bits
-func SplitAt(b uint, index int) []uint {
-	firstHalf := uint(0) | b>>(bits.Len(b)-index)
-	return []uint{firstHalf, b ^ (firstHalf << (bits.Len(b) - index))}
+// SplitAt returns the binary argument in two halves at the index specified [0, index), excluding leading zero bits if leng is -1
+func SplitAt(b uint, index int, leng int) []uint {
+	if leng < 0 {
+		leng = bits.Len(b)
+	}
+	firstHalf := uint(0) | b>>(leng-index)
+	return []uint{firstHalf, b ^ (firstHalf << (leng - index))}
 }
 
 // TruncateFromRight returns the binary truncated up to the index from the right, exclusive of the index
@@ -71,9 +74,12 @@ func ClearFromRight(b uint, index int) uint {
 	return b &^ (1<<index - 1)
 }
 
-// TruncateFromLeft returns binary truncated up to the index from the left, exclusive of the index
-func TruncateFromLeft(b uint, index int) uint {
-	return b &^ ((1<<index - 1) << (bits.Len(b) - index))
+// TruncateFromLeft returns binary truncated up to the index from the left, exclusive of the index; excluding leading zero bits if leng is -1
+func TruncateFromLeft(b uint, index int, leng int) uint {
+	if leng < 0 {
+		leng = bits.Len(b)
+	}
+	return b &^ ((1<<index - 1) << (leng - index))
 }
 
 // RemoveBit returns the binary with the bit at index removed, length of the binary decreases by one
@@ -113,8 +119,11 @@ func ColumnJoin(rows []uint, colLen int) []uint {
 	return cols
 }
 
-// Repeat returns a binary that is a repetition of the given bit pattern `b`, with length of the repeated unit `leng` (since leading zeroes would be ignored otherwise) and number of repetitions `count`
-func Repeat(b uint, leng int, count int) uint {
+// Repeat returns a binary that is a repetition of the given bit pattern `b`, with length of the repeated unit `leng` (since leading zeroes would be ignored otherwise, parse -1 for leng if length unknown) and number of repetitions `count`
+func Repeat(b uint, count int, leng int) uint {
+	if leng < 0 {
+		leng = bits.Len(b)
+	}
 	combined := uint(0)
 	for i := 0; i < count; i++ {
 		combined = combined<<leng | b
@@ -122,3 +131,18 @@ func Repeat(b uint, leng int, count int) uint {
 	return combined
 }
 
+func Replace(b uint, old uint, new uint, n int, leng int, oldLeng int) uint {
+	if leng < 0 {
+		leng = bits.Len(b)
+	}
+	if oldLeng < 0 {
+		oldLeng = bits.Len(old)
+	}
+	result := uint(0)
+	for n > 0 {
+		for i := 0; i < leng; i++ {
+
+		}
+	}
+	return result
+}
