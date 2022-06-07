@@ -48,11 +48,11 @@ func LastIndexOfZero(b uint) int {
 
 // GetBitAtIndex returns the bit at index `ind` of the given binary, index counting from left to right from zero as usual
 // `Leng` is an optional argument to specify the exact length of the binary including leading zeroes
-func GetBitAtIndex(b uint, ind uint, leng int) uint {
+func GetBitAtIndex(b uint, ind int, leng int) uint {
 	if leng == -1 {
 		leng = bits.Len(b)
 	}
-	return b >> (uint(leng) - ind - 1) & 1
+	return b >> uint(leng-ind-1) & 1
 }
 
 // SplitAt returns the binary argument in two halves at the index specified [0, index), excluding leading zero bits if leng is -1
@@ -65,8 +65,8 @@ func SplitAt(b uint, index int, leng int) []uint {
 }
 
 // TruncateFromRight returns the binary truncated up to the index from the right, exclusive of the index
-func TruncateFromRight(b uint, index int) uint {
-	return b >> index
+func TruncateFromRight(b uint, pos int) uint {
+	return b >> pos
 }
 
 // ClearFromRight returns the binary bits set to zero up to the index from the right, exclusive of the index
@@ -131,17 +131,27 @@ func Repeat(b uint, count int, leng int) uint {
 	return combined
 }
 
-func Replace(b uint, old uint, new uint, n int, leng int, oldLeng int) uint {
+func Replace(b uint, old uint, new uint, n int, leng int, oldLeng int, newLeng int) uint {
 	if leng < 0 {
 		leng = bits.Len(b)
 	}
 	if oldLeng < 0 {
 		oldLeng = bits.Len(old)
 	}
+	if newLeng < 0 {
+		newLeng = bits.Len(new)
+	}
 	result := uint(0)
-	for n > 0 {
-		for i := 0; i < leng; i++ {
-
+	for i := 0; i < leng; {
+		window := TruncateFromLeft(b, i, leng)
+		window = TruncateFromRight(window, leng-i-oldLeng)
+		if window == old && n > 0 {
+			result = result<<newLeng | new
+			n--
+			i += oldLeng
+		} else {
+			result = result<<1 | GetBitAtIndex(b, i, leng)
+			i++
 		}
 	}
 	return result
