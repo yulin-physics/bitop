@@ -37,6 +37,7 @@ func TestIsPalindrome(t *testing.T) {
 			expected: true,
 		},
 	} {
+		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
 			t.Parallel()
 			result := IsPalindrome(tc.b, tc.leng)
