@@ -74,6 +74,12 @@ Repeat constructs a binary based on a given repeating bit pattern
 
 Replace constructs a new binary with the old sub bits replaced by the new up to n times
 
+##
+
+`func IsPalindrome(b uint, leng int)`
+
+Returns true if the binary is symmetrical
+
 ## Resources
 
 - [How to Use a Private Go Module in Your Own Project](https://www.digitalocean.com/community/tutorials/how-to-use-a-private-go-module-in-your-own-project)
