@@ -76,9 +76,15 @@ Repeat constructs a binary based on a given repeating bit pattern
 
 Replace constructs a new binary with the old sub bits replaced by the new up to n times
 
+## Flip
+
 `func FlipAtIndex(b uint, index int, leng int)`
 
 Flips the bit at index i in the binary
+
+flip all bits
+
+## Reverse
 
 ## Resources
 
