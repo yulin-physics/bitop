@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	a := bitop.FlipAtIndex(0b101010, 2, 6)
+	a := bitop.Flip(0b0101, 4)
 	fmt.Printf("%02b", a)
 }

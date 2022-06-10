@@ -82,7 +82,9 @@ Replace constructs a new binary with the old sub bits replaced by the new up to 
 
 Flips the bit at index i in the binary
 
-flip all bits
+`func Flip(b uint, leng int)`
+
+Flips all bits
 
 ## Reverse
 
