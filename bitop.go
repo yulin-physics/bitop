@@ -168,7 +168,46 @@ func Replace(b uint, old uint, new uint, n int, leng int, oldLeng int, newLeng i
 	return result
 }
 
-// IsPalindrome checks if the binary is symmetrical, leng is an optional input for number of bits in the binary (set as -1 to omit)
+// FlipAtIndex flips the bit at index i in the binary
+// leng is an optional input for number of bits in the binary, to account for leading zeroes (set as -1 to omit)
+func FlipAtIndex(b uint, index int, leng int) uint {
+	if index < 0 {
+		return b
+	}
+	if leng < 0 {
+		leng = bits.Len(b)
+	}
+	return b | 1<<uint(leng-index-1)
+}
+
+// Flip returns a binary with all bits flipped
+// leng is an optional input for number of bits in the binary, to account for leading zeroes (set as -1 to omit)
+func Flip(b uint, leng int) uint {
+	if leng < 0 {
+		leng = bits.Len(b)
+	}
+	result := uint(0)
+	for i := leng - 1; i >= 0; i-- {
+		result = result<<1 | (1 ^ b>>i&1)
+	}
+	return result
+}
+
+// Reverse returns a binary with bits in reversed order
+// leng is an optional input for number of bits in the binary, to account for leading zeroes (set as -1 to omit)
+func Reverse(b uint, leng int) uint {
+	if leng < 0 {
+		leng = bits.Len(b)
+	}
+	reversed := uint(0)
+	for i := 0; i < leng; i++ {
+		reversed = reversed<<1 | b>>i&1
+	}
+	return reversed
+}
+
+// IsPalindrome checks if the binary is symmetrical
+// leng is an optional input for number of bits in the binary (set as -1 to omit)
 func IsPalindrome(b uint, leng int) bool {
 	if leng < 0 {
 		leng = bits.Len(b)

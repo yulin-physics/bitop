@@ -12,7 +12,9 @@ For learning purposes only, use at your own risk.
 
 Checks if the argument has at least one bit that is one (or zero)
 
-palindrome symmetry checker
+`func IsPalindrome(b uint, leng int)`
+
+Returns true if the binary contains symmetry
 
 ## Last Index
 
@@ -74,11 +76,21 @@ Repeat constructs a binary based on a given repeating bit pattern
 
 Replace constructs a new binary with the old sub bits replaced by the new up to n times
 
-##
+## Flip
 
-`func IsPalindrome(b uint, leng int)`
+`func FlipAtIndex(b uint, index int, leng int)`
 
-Returns true if the binary is symmetrical
+Flips the bit at index i in the binary
+
+`func Flip(b uint, leng int)`
+
+Flips all bits
+
+## Reverse
+
+`func Reverse(b uint, leng int)`
+
+Returns bits in reversed order
 
 ## Resources
 

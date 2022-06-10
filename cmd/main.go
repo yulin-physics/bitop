@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	a := bitop.Replace(0b101010, 0b01, 0b1, 2, 6, 2, 1)
+	a := bitop.Reverse(0b0001, 4)
 	fmt.Printf("%02b", a)
 }
