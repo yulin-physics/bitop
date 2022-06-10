@@ -88,6 +88,10 @@ Flips all bits
 
 ## Reverse
 
+`func Reverse(b uint, leng int)`
+
+Returns bits in reversed order
+
 ## Resources
 
 - [How to Use a Private Go Module in Your Own Project](https://www.digitalocean.com/community/tutorials/how-to-use-a-private-go-module-in-your-own-project)
