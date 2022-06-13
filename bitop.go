@@ -4,23 +4,27 @@ import (
 	"math/bits"
 )
 
+// Unit consists of a binary value which the bitop functions act on, and the number of bits in the binary as leng
 type Unit struct {
-	b    uint
-	leng int
+	value uint
+	leng  int
 }
 
-// Contains returns true if the binary has at least one bit that is 0b1
-func Contains(b uint, subBits uint, leng int, subBitsLeng int) bool {
+// NewUnit returns a new unit type required by all functions
+// Give -ve leng to take default length measure of the input binary, which omits leading zeros
+func NewUnit(b uint, leng int) Unit {
 	if leng < 0 {
 		leng = bits.Len(b)
 	}
-	if subBitsLeng < 0 {
-		subBitsLeng = bits.Len(subBits)
-	}
-	for i := 0; i <= leng-subBitsLeng; i++ {
-		window := TruncateFromLeft(b, i, leng)
-		window = TruncateFromRight(window, leng-i-subBitsLeng)
-		if window == subBits {
+	return Unit{value: b, leng: leng}
+}
+
+// Contains returns true if the binary has at least one bit that is 0b1
+func Contains(b, sub Unit) bool {
+	for i := 0; i <= b.leng-sub.leng; i++ {
+		window := TruncateFromLeft(b, i)
+		window = TruncateFromRight(window, b.leng-i-sub.leng)
+		if window == sub.value {
 			return true
 		}
 	}
@@ -84,14 +88,11 @@ func ClearFromRight(b uint, index int) uint {
 }
 
 // TruncateFromLeft returns binary truncated up to the index from the left, exclusive of the index; excluding leading zero bits if leng is -1
-func TruncateFromLeft(b uint, index int, leng int) uint {
+func TruncateFromLeft(b Unit, index int) uint {
 	if index < 0 {
-		return b
+		return b.value
 	}
-	if leng < 0 {
-		leng = bits.Len(b)
-	}
-	return b &^ ((1<<index - 1) << (leng - index))
+	return b.value &^ ((1<<index - 1) << (b.leng - index))
 }
 
 // RemoveBit returns the binary with the bit at index removed, length of the binary decreases by one
@@ -157,16 +158,16 @@ func Replace(b uint, old uint, new uint, n int, leng int, oldLeng int, newLeng i
 	}
 	result := uint(0)
 	for i := 0; i < leng; {
-		window := TruncateFromLeft(b, i, leng)
-		window = TruncateFromRight(window, leng-i-oldLeng)
-		if window == old && n > 0 {
-			result = result<<newLeng | new
-			n--
-			i += oldLeng
-		} else {
-			result = result<<1 | GetBitAtIndex(b, i, leng)
-			i++
-		}
+		// window := TruncateFromLeft(b, i, leng)
+		// window = TruncateFromRight(window, leng-i-oldLeng)
+		// if window == old && n > 0 {
+		// 	result = result<<newLeng | new
+		// 	n--
+		// 	i += oldLeng
+		// } else {
+		// 	result = result<<1 | GetBitAtIndex(b, i, leng)
+		// 	i++
+		// }
 	}
 	return result
 }

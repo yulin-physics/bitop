@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	a := bitop.Contains(0b11110, 0b00, 6, 2)
+	a := bitop.Contains(bitop.NewUnit(0b0101, 4), bitop.NewUnit(0b11, 2))
 	fmt.Printf("%v", a)
 }
