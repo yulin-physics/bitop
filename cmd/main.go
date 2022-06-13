@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	a := bitop.Reverse(0b0001, 4)
-	fmt.Printf("%02b", a)
+	a := bitop.Contains(0b11110, 0b00, 6, 2)
+	fmt.Printf("%v", a)
 }

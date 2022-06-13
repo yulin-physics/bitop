@@ -4,20 +4,23 @@ import (
 	"math/bits"
 )
 
-// ContainsOne returns true if the argument has at least one bit that is 0b1
-func ContainsOne(b uint) bool {
-	for i := 0; i < bits.Len(b); i++ {
-		if (b>>i)&1 == 1 {
-			return true
-		}
-	}
-	return false
+type Unit struct {
+	b    uint
+	leng int
 }
 
-// ContainsZero returns true if the argument has at least one bit that is 0b0, excluding leading zeros on the left
-func ContainsZero(b uint) bool {
-	for i := 0; i < bits.Len(b); i++ {
-		if (b>>i)&1 == 0 {
+// Contains returns true if the binary has at least one bit that is 0b1
+func Contains(b uint, subBits uint, leng int, subBitsLeng int) bool {
+	if leng < 0 {
+		leng = bits.Len(b)
+	}
+	if subBitsLeng < 0 {
+		subBitsLeng = bits.Len(subBits)
+	}
+	for i := 0; i <= leng-subBitsLeng; i++ {
+		window := TruncateFromLeft(b, i, leng)
+		window = TruncateFromRight(window, leng-i-subBitsLeng)
+		if window == subBits {
 			return true
 		}
 	}
