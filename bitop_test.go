@@ -48,6 +48,62 @@ func TestContains(t *testing.T) {
 	}
 }
 
+func TestLastIndex(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		b        Unit
+		sub      Unit
+		expected int
+	}{
+		{
+			name:     "ones",
+			b:        NewUnit(0b111111, -1),
+			sub:      NewUnit(0b11, -1),
+			expected: 4,
+		},
+		{
+			name:     "zeroes",
+			b:        NewUnit(0b000000, 6),
+			sub:      NewUnit(0b11, -1),
+			expected: -1,
+		},
+		{
+			name:     "0b010101",
+			b:        NewUnit(0b010101, 6),
+			sub:      NewUnit(0b01, 2),
+			expected: 4,
+		},
+		{
+			name:     "0b110110",
+			b:        NewUnit(0b110110, 6),
+			sub:      NewUnit(0b111, 3),
+			expected: -1,
+		},
+		{
+			name:     "bit one",
+			b:        NewUnit(0b110110, 6),
+			sub:      NewUnit(0b1, -1),
+			expected: 4,
+		},
+		{
+			name:     "bit zero",
+			b:        NewUnit(0b110110, 6),
+			sub:      NewUnit(0b0, 1),
+			expected: 5,
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := LastIndex(tc.b, tc.sub)
+			if result != tc.expected {
+				t.Fatalf("[TestLastIndex][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+			}
+		})
+	}
+}
+
 func TestIsPalindrome(t *testing.T) {
 	t.Parallel()
 	for _, tc := range []struct {
