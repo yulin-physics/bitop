@@ -1,7 +1,6 @@
 package bitop
 
 import (
-	"fmt"
 	"math/bits"
 )
 
@@ -37,7 +36,6 @@ func LastIndex(b, sub Unit) int {
 	for i := 0; i <= b.leng-sub.leng; i++ {
 		window := TruncateFromLeft(b, b.leng-i-sub.leng)
 		window = TruncateFromRight(window, i)
-		fmt.Printf("%02b %d\n", window, i)
 		if window == sub.value {
 			return b.leng - i - sub.leng
 		}
