@@ -1,6 +1,7 @@
 package bitop
 
 import (
+	"fmt"
 	"math/bits"
 )
 
@@ -31,23 +32,14 @@ func Contains(b, sub Unit) bool {
 	return false
 }
 
-// LastIndexOfOne returns the last index of 0b1, excluding leading zeros on the left
-// If no trailing ones are found, -1 is returned
-func LastIndexOfOne(b uint) int {
-	for i := 0; i < bits.Len(b); i++ {
-		if (b>>i)&1 == 1 {
-			return bits.Len(b) - i - 1
-		}
-	}
-	return -1
-}
-
-// LastIndexOfZero returns the last index of 0b0, excluding leading zeros on the left
-// If no trailing zeros are found, -1 is returned
-func LastIndexOfZero(b uint) int {
-	for i := 0; i < bits.Len(b); i++ {
-		if (b>>i)&1 == 0 {
-			return bits.Len(b) - i - 1
+// LastIndex returns the last index of the given bit pattern, if no matching found -1 is returned
+func LastIndex(b, sub Unit) int {
+	for i := 0; i <= b.leng-sub.leng; i++ {
+		window := TruncateFromLeft(b, b.leng-i-sub.leng)
+		window = TruncateFromRight(window, i)
+		fmt.Printf("%02b %d\n", window, i)
+		if window == sub.value {
+			return b.leng - i - sub.leng
 		}
 	}
 	return -1
