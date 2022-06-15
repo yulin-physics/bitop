@@ -104,6 +104,50 @@ func TestLastIndex(t *testing.T) {
 	}
 }
 
+func TestGetBitAtIndex(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		b        Unit
+		index    int
+		expected uint
+	}{
+		{
+			name:     "ones",
+			b:        NewUnit(0b111111, -1),
+			index:    1,
+			expected: 0b1,
+		},
+		{
+			name:     "zeroes",
+			b:        NewUnit(0b000000, 6),
+			index:    4,
+			expected: 0b0,
+		},
+		{
+			name:     "0b010101",
+			b:        NewUnit(0b010101, 6),
+			index:    0,
+			expected: 0b0,
+		},
+		{
+			name:     "0b110110",
+			b:        NewUnit(0b110110, 6),
+			index:    0,
+			expected: 0b1,
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := GetBitAtIndex(tc.b, tc.index)
+			if result != tc.expected {
+				t.Fatalf("[TestGetBitAtIndex][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+			}
+		})
+	}
+}
+
 func TestIsPalindrome(t *testing.T) {
 	t.Parallel()
 	for _, tc := range []struct {
