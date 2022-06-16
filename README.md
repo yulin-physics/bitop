@@ -4,6 +4,19 @@ This bit operations library mimicks the functions of Go strings library.
 
 For learning purposes only, use at your own risk.
 
+## Index
+
+Types:
+
+[Unit](#types)
+
+Functions:
+
+[Contains](#func-contains)
+[GetBitAtIndex](#func-getbitatindex)
+[LastIndex](#func-lastindex)
+[SplitAt](#func-splitat)
+
 ## Types
 
 The visible length of the binary is required in bit shifting in this package, therefore a new type `Unit` is used.
@@ -16,13 +29,6 @@ type Unit struct {
 	leng  int
 }
 ```
-
-## Index
-
-[Contains](#func-contains)
-[LastIndex](#func-lastindex)
-[GetBitAtIndex](#func-getbitatindex)
-[SplitAt](#func-splitat)
 
 ## Functions
 
