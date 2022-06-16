@@ -45,13 +45,19 @@ func LastIndex(b, sub Unit) int {
 
 // GetBitAtIndex returns the bit at index `ind` of the given binary, index counting from left to right from zero as usual
 func GetBitAtIndex(b Unit, ind int) uint {
+	if ind < 0 {
+		return b.value
+	}
 	return b.value >> uint(b.leng-ind-1) & 1
 }
 
 // SplitAt returns the binary argument in two halves at the index specified [0, index)
-func SplitAt(b Unit, index int) []uint {
-	firstHalf := uint(0) | b.value>>(b.leng-index)
-	return []uint{firstHalf, b.value ^ (firstHalf << (b.leng - index))}
+func SplitAt(b Unit, ind int) []uint {
+	if ind < 0 {
+		return []uint{b.value}
+	}
+	firstHalf := uint(0) | b.value>>(b.leng-ind)
+	return []uint{firstHalf, b.value ^ (firstHalf << (b.leng - ind))}
 }
 
 // TruncateFromRight returns the binary truncated up to the index from the right, exclusive of the index
