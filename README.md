@@ -54,13 +54,13 @@ Finds the index (counting from left to right) of the last bit pattern in `b` tha
 
 Finds the bit at index `ind` of binary `b`.
 
-## func SplitAt
+### func SplitAt
 
 `func SplitAt(b Unit, index int) []uint`
 
 Splits the binary in two at the index, returns the 2 sub-binaries
 
-## Join
+### Join
 
 `func Join(bs []uint, sep uint)`
 
@@ -72,7 +72,7 @@ ColumnJoin combines the binary values in each corresponding bit position, formin
 
 colLen is usually the bit length of an element in rows, but since leading zeroes are ommited, user needs to specify the bit length
 
-## Trim
+### Trim
 
 `func TruncateFromRight(b uint, index int) `
 
@@ -88,13 +88,13 @@ Clear preserves the binary length and resets the bits from right to zero, up to 
 
 RemoveBit removes the bit at the index from the binary
 
-## Repeat
+### Repeat
 
 `func Repeat(b uint, leng int, count int)`
 
 Repeat constructs a binary based on a given repeating bit pattern
 
-## Replace
+### Replace
 
 `func Replace(b uint, old uint, new uint, n int, leng int, oldLeng int, newLeng int)`
 
