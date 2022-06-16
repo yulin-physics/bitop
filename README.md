@@ -4,35 +4,53 @@ This bit operations library mimicks the functions of Go strings library.
 
 For learning purposes only, use at your own risk.
 
-## Contains
+## Types
 
-`func ContainsOne(b uint)`
+The visible length of the binary is required in bit shifting in this package, therefore a new type `Unit` is used.
 
-`func ContainsZero(b uint)`
+An Unit composed of the binary itself and length of the binary.
 
-Checks if the argument has at least one bit that is one (or zero)
+```
+type Unit struct {
+	value uint
+	leng  int
+}
+```
 
-`func IsPalindrome(b uint, leng int)`
+## Index
+
+[Contains](#func-contains)
+[LastIndex](#func-lastindex)
+[GetBitAtIndex](#func-getbitatindex)
+[SplitAt](#func-splitat)
+
+## Functions
+
+### func Contains
+
+`func Contains(b, sub Unit) bool`
+
+Checks the target binary `b` has at least one part that matches the sub-binary value.
+
+`func IsPalindrome(b uint, leng int) bool`
 
 Returns true if the binary contains symmetry
 
-## Last Index
+### func LastIndex
 
-`func LastIndexOfOne(b uint)`
+`func LastIndex(b, sub Unit) int`
 
-`func LastIndexOfZero(b uint)`
+Finds the index (counting from left to right) of the last bit pattern in `b` that matches `sub`.
 
-Finds the index of the last bit one (or zero) of the argument counting from left to right
+### func GetBitAtIndex
 
-## GetBitAtIndex
+`func GetBitAtIndex(b Unit, ind int) uint`
 
-`func GetBitAtIndex(b uint, ind uint, leng int)`
+Finds the bit at index `ind` of binary `b`.
 
-Finds the bit at index ind, length of binary is optional and can be skipped by inserting -1
+## func SplitAt
 
-## Split
-
-`func SplitAt(b uint, index int)`
+`func SplitAt(b Unit, index int) []uint`
 
 Splits the binary in two at the index, returns the 2 sub-binaries
 

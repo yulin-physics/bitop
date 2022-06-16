@@ -48,13 +48,10 @@ func GetBitAtIndex(b Unit, ind int) uint {
 	return b.value >> uint(b.leng-ind-1) & 1
 }
 
-// SplitAt returns the binary argument in two halves at the index specified [0, index), excluding leading zero bits if leng is -1
-func SplitAt(b uint, index int, leng int) []uint {
-	if leng < 0 {
-		leng = bits.Len(b)
-	}
-	firstHalf := uint(0) | b>>(leng-index)
-	return []uint{firstHalf, b ^ (firstHalf << (leng - index))}
+// SplitAt returns the binary argument in two halves at the index specified [0, index)
+func SplitAt(b Unit, index int) []uint {
+	firstHalf := uint(0) | b.value>>(b.leng-index)
+	return []uint{firstHalf, b.value ^ (firstHalf << (b.leng - index))}
 }
 
 // TruncateFromRight returns the binary truncated up to the index from the right, exclusive of the index
