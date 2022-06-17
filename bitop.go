@@ -85,15 +85,15 @@ func TruncateFromLeft(b Unit, ind int) uint {
 }
 
 // RemoveBit returns the binary with the bit at index removed, length of the binary decreases by one
-func RemoveBit(b uint, index int) uint {
-	temp := uint(0)
-	for i := 0; i < bits.Len(b); i++ {
+func RemoveBit(b Unit, index int) uint {
+	new := uint(0)
+	for i := 0; i < b.leng; i++ {
 		if i == index {
 			continue
 		}
-		temp = temp<<1 | b>>(bits.Len(b)-i-1)&1
+		new = new<<1 | b.value>>(b.leng-i-1)&1
 	}
-	return temp
+	return new
 }
 
 // Join returns a single binary by combining all binary values together separated by the given separator

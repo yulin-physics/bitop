@@ -326,6 +326,50 @@ func TestClearFromRight(t *testing.T) {
 	}
 }
 
+func TestRemoveBit(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		b        Unit
+		index    int
+		expected uint
+	}{
+		{
+			name:     "ones",
+			b:        NewUnit(0b111111, -1),
+			index:    2,
+			expected: 0b11111,
+		},
+		{
+			name:     "zeroes",
+			b:        NewUnit(0b0000, 4),
+			index:    1,
+			expected: 0b000,
+		},
+		{
+			name:     "010101",
+			b:        NewUnit(0b010101, 6),
+			index:    3,
+			expected: 0b01001,
+		},
+		{
+			name:     "1001",
+			b:        NewUnit(0b1001, -1),
+			index:    0,
+			expected: 0b001,
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := RemoveBit(tc.b, tc.index)
+			if result != tc.expected {
+				t.Fatalf("[TestRemoveBit][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+			}
+		})
+	}
+}
+
 func TestIsPalindrome(t *testing.T) {
 	t.Parallel()
 	for _, tc := range []struct {
