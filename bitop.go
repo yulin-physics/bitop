@@ -76,12 +76,12 @@ func ClearFromRight(b uint, index int) uint {
 	return b &^ (1<<index - 1)
 }
 
-// TruncateFromLeft returns binary truncated up to the index from the left, exclusive of the index; excluding leading zero bits if leng is -1
-func TruncateFromLeft(b Unit, index int) uint {
-	if index < 0 {
+// TruncateFromLeft returns binary truncated up to the index from the left, exclusive of the index
+func TruncateFromLeft(b Unit, ind int) uint {
+	if ind < 0 {
 		return b.value
 	}
-	return b.value &^ ((1<<index - 1) << (b.leng - index))
+	return b.value &^ ((1<<ind - 1) << (b.leng - ind))
 }
 
 // RemoveBit returns the binary with the bit at index removed, length of the binary decreases by one
