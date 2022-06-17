@@ -194,6 +194,50 @@ func TestSplitAt(t *testing.T) {
 	}
 }
 
+func TestTruncateFromRight(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		b        uint
+		pos      int
+		expected uint
+	}{
+		{
+			name:     "ones",
+			b:        0b111111,
+			pos:      2,
+			expected: 0b1111,
+		},
+		{
+			name:     "zeroes",
+			b:        0b0000,
+			pos:      1,
+			expected: 0b000,
+		},
+		{
+			name:     "010101",
+			b:        0b010101,
+			pos:      3,
+			expected: 0b010,
+		},
+		{
+			name:     "1001",
+			b:        0b1001,
+			pos:      0,
+			expected: 0b1001,
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := TruncateFromRight(tc.b, tc.pos)
+			if result != tc.expected {
+				t.Fatalf("[TestTruncateFromRight][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+			}
+		})
+	}
+}
+
 func TestIsPalindrome(t *testing.T) {
 	t.Parallel()
 	for _, tc := range []struct {
