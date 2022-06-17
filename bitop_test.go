@@ -282,6 +282,50 @@ func TestTruncateFromLeft(t *testing.T) {
 	}
 }
 
+func TestClearFromRight(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		b        Unit
+		index    int
+		expected uint
+	}{
+		{
+			name:     "ones",
+			b:        NewUnit(0b111111, -1),
+			index:    2,
+			expected: 0b111100,
+		},
+		{
+			name:     "zeroes",
+			b:        NewUnit(0b0000, 4),
+			index:    1,
+			expected: 0b0000,
+		},
+		{
+			name:     "010101",
+			b:        NewUnit(0b010101, 6),
+			index:    3,
+			expected: 0b010000,
+		},
+		{
+			name:     "1001",
+			b:        NewUnit(0b1001, -1),
+			index:    0,
+			expected: 0b1001,
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := ClearFromRight(tc.b, tc.index)
+			if result != tc.expected {
+				t.Fatalf("[TestClearFromRight][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+			}
+		})
+	}
+}
+
 func TestIsPalindrome(t *testing.T) {
 	t.Parallel()
 	for _, tc := range []struct {
