@@ -194,6 +194,182 @@ func TestSplitAt(t *testing.T) {
 	}
 }
 
+func TestTruncateFromRight(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		b        uint
+		pos      int
+		expected uint
+	}{
+		{
+			name:     "ones",
+			b:        0b111111,
+			pos:      2,
+			expected: 0b1111,
+		},
+		{
+			name:     "zeroes",
+			b:        0b0000,
+			pos:      1,
+			expected: 0b000,
+		},
+		{
+			name:     "010101",
+			b:        0b010101,
+			pos:      3,
+			expected: 0b010,
+		},
+		{
+			name:     "1001",
+			b:        0b1001,
+			pos:      0,
+			expected: 0b1001,
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := TruncateFromRight(tc.b, tc.pos)
+			if result != tc.expected {
+				t.Fatalf("[TestTruncateFromRight][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+			}
+		})
+	}
+}
+
+func TestTruncateFromLeft(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		b        Unit
+		index    int
+		expected uint
+	}{
+		{
+			name:     "ones",
+			b:        NewUnit(0b111111, -1),
+			index:    2,
+			expected: 0b1111,
+		},
+		{
+			name:     "zeroes",
+			b:        NewUnit(0b0000, 4),
+			index:    1,
+			expected: 0b000,
+		},
+		{
+			name:     "010101",
+			b:        NewUnit(0b010101, 6),
+			index:    3,
+			expected: 0b101,
+		},
+		{
+			name:     "1001",
+			b:        NewUnit(0b1001, -1),
+			index:    0,
+			expected: 0b1001,
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := TruncateFromLeft(tc.b, tc.index)
+			if result != tc.expected {
+				t.Fatalf("[TestTruncateFromLeft][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+			}
+		})
+	}
+}
+
+func TestClearFromRight(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		b        Unit
+		index    int
+		expected uint
+	}{
+		{
+			name:     "ones",
+			b:        NewUnit(0b111111, -1),
+			index:    2,
+			expected: 0b111100,
+		},
+		{
+			name:     "zeroes",
+			b:        NewUnit(0b0000, 4),
+			index:    1,
+			expected: 0b0000,
+		},
+		{
+			name:     "010101",
+			b:        NewUnit(0b010101, 6),
+			index:    3,
+			expected: 0b010000,
+		},
+		{
+			name:     "1001",
+			b:        NewUnit(0b1001, -1),
+			index:    0,
+			expected: 0b1001,
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := ClearFromRight(tc.b, tc.index)
+			if result != tc.expected {
+				t.Fatalf("[TestClearFromRight][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+			}
+		})
+	}
+}
+
+func TestRemoveBit(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		b        Unit
+		index    int
+		expected uint
+	}{
+		{
+			name:     "ones",
+			b:        NewUnit(0b111111, -1),
+			index:    2,
+			expected: 0b11111,
+		},
+		{
+			name:     "zeroes",
+			b:        NewUnit(0b0000, 4),
+			index:    1,
+			expected: 0b000,
+		},
+		{
+			name:     "010101",
+			b:        NewUnit(0b010101, 6),
+			index:    3,
+			expected: 0b01001,
+		},
+		{
+			name:     "1001",
+			b:        NewUnit(0b1001, -1),
+			index:    0,
+			expected: 0b001,
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := RemoveBit(tc.b, tc.index)
+			if result != tc.expected {
+				t.Fatalf("[TestRemoveBit][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+			}
+		})
+	}
+}
+
 func TestIsPalindrome(t *testing.T) {
 	t.Parallel()
 	for _, tc := range []struct {

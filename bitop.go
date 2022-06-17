@@ -69,31 +69,31 @@ func TruncateFromRight(b uint, pos int) uint {
 }
 
 // ClearFromRight returns the binary bits set to zero up to the index from the right, exclusive of the index
-func ClearFromRight(b uint, index int) uint {
-	if index < 0 {
-		return b
-	}
-	return b &^ (1<<index - 1)
-}
-
-// TruncateFromLeft returns binary truncated up to the index from the left, exclusive of the index; excluding leading zero bits if leng is -1
-func TruncateFromLeft(b Unit, index int) uint {
-	if index < 0 {
+func ClearFromRight(b Unit, ind int) uint {
+	if ind < 0 {
 		return b.value
 	}
-	return b.value &^ ((1<<index - 1) << (b.leng - index))
+	return b.value &^ (1<<ind - 1)
+}
+
+// TruncateFromLeft returns binary truncated up to the index from the left, exclusive of the index
+func TruncateFromLeft(b Unit, ind int) uint {
+	if ind < 0 {
+		return b.value
+	}
+	return b.value &^ ((1<<ind - 1) << (b.leng - ind))
 }
 
 // RemoveBit returns the binary with the bit at index removed, length of the binary decreases by one
-func RemoveBit(b uint, index int) uint {
-	temp := uint(0)
-	for i := 0; i < bits.Len(b); i++ {
+func RemoveBit(b Unit, index int) uint {
+	new := uint(0)
+	for i := 0; i < b.leng; i++ {
 		if i == index {
 			continue
 		}
-		temp = temp<<1 | b>>(bits.Len(b)-i-1)&1
+		new = new<<1 | b.value>>(b.leng-i-1)&1
 	}
-	return temp
+	return new
 }
 
 // Join returns a single binary by combining all binary values together separated by the given separator
