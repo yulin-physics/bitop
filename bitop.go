@@ -97,15 +97,14 @@ func RemoveBit(b Unit, index int) uint {
 }
 
 // Join returns a single binary by combining all binary values together separated by the given separator
-// 0b0 is equivalent to no separator because leading zeros are omitted
-func Join(bs []uint, sep uint) uint {
+func Join(bs []Unit, sep Unit) uint {
 	joined := uint(0)
 	for i, b := range bs {
-		joined = joined<<bits.Len(b) | b
+		joined = joined<<uint(b.leng) | b.value
 		if i == len(bs)-1 {
 			break
 		}
-		joined = joined<<bits.Len(sep) | sep
+		joined = joined<<sep.leng | sep.value
 	}
 	return joined
 }

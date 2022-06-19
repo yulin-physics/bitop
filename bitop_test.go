@@ -370,6 +370,32 @@ func TestRemoveBit(t *testing.T) {
 	}
 }
 
+func TestJoin(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		bs       []Unit
+		sep      Unit
+		expected uint
+	}{
+		{
+			name:     "ones",
+			bs:       []Unit{NewUnit(0b111111, -1)},
+			sep:      NewUnit(0b0, 0),
+			expected: 0b111111,
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := Join(tc.bs, tc.sep)
+			if result != tc.expected {
+				t.Fatalf("[TestJoin][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+			}
+		})
+	}
+}
+
 func TestIsPalindrome(t *testing.T) {
 	t.Parallel()
 	for _, tc := range []struct {
