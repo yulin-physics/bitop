@@ -440,12 +440,12 @@ func TestColumnJoin(t *testing.T) {
 			colLeng:  4,
 			expected: []uint{0b10101, 0b01111, 0b10110, 0b01010},
 		},
-		// {
-		// 	name:     "variable lengths",
-		// 	rows:     []uint{0b1010, 0b010, 0b110, 0b01011, 0b1100},
-		// 	colLeng:  4,
-		// 	expected: []uint{0b10101, 0b01101, 0b10000, 0b00010},
-		// },
+		{
+			name:     "variable lengths",
+			rows:     []uint{0b1010, 0b010, 0b110, 0b01011, 0b1100},
+			colLeng:  4,
+			expected: []uint{0b10011, 0b00101, 0b11110, 0b00010},
+		},
 	} {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
