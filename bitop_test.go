@@ -370,6 +370,96 @@ func TestRemoveBit(t *testing.T) {
 	}
 }
 
+func TestJoin(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		bs       []Unit
+		sep      Unit
+		expected uint
+	}{
+		{
+			name:     "ones",
+			bs:       []Unit{NewUnit(0b111111, -1), NewUnit(0b11, -1)},
+			sep:      NewUnit(0b0, 0),
+			expected: 0b11111111,
+		},
+		{
+			name:     "zeroes",
+			bs:       []Unit{NewUnit(0b00, 2), NewUnit(0b000, 3)},
+			sep:      NewUnit(0b0, 0),
+			expected: 0b00000,
+		},
+		{
+			name:     "single separator 0b1",
+			bs:       []Unit{NewUnit(0b00, 2), NewUnit(0b000, 3)},
+			sep:      NewUnit(0b1, 0),
+			expected: 0b001000,
+		},
+		{
+			name:     "multiple separator 0b1",
+			bs:       []Unit{NewUnit(0b1011, -1), NewUnit(0b101, -1), NewUnit(0b111, -1), NewUnit(0b0000, 4)},
+			sep:      NewUnit(0b0, 1),
+			expected: 0b10110101011100000,
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := Join(tc.bs, tc.sep)
+			if result != tc.expected {
+				t.Fatalf("[TestJoin][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+			}
+		})
+	}
+}
+
+func TestColumnJoin(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		rows     []uint
+		colLeng  int
+		expected []uint
+	}{
+		{
+			name:     "ones",
+			rows:     []uint{0b111, 0b111, 0b111, 0b111},
+			colLeng:  3,
+			expected: []uint{0b1111, 0b1111, 0b1111},
+		},
+		{
+			name:     "zeroes",
+			rows:     []uint{0b000, 0b000, 0b000, 0b000, 0b000},
+			colLeng:  3,
+			expected: []uint{0b00000, 0b00000, 0b00000},
+		},
+		{
+			name:     "same lengths",
+			rows:     []uint{0b1010, 0b0101, 0b1110, 0b0111, 0b1100},
+			colLeng:  4,
+			expected: []uint{0b10101, 0b01111, 0b10110, 0b01010},
+		},
+		{
+			name:     "variable lengths",
+			rows:     []uint{0b1010, 0b010, 0b110, 0b01011, 0b1100},
+			colLeng:  4,
+			expected: []uint{0b10011, 0b00101, 0b11110, 0b00010},
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := ColumnJoin(tc.rows, tc.colLeng)
+			for i, r := range result {
+				if r != tc.expected[i] {
+					t.Fatalf("[TestColumnJoin][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+				}
+			}
+		})
+	}
+}
+
 func TestIsPalindrome(t *testing.T) {
 	t.Parallel()
 	for _, tc := range []struct {
