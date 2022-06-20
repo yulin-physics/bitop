@@ -13,7 +13,9 @@ Types:
 Functions:
 
 [Contains](#func-contains)
+[ColumnJoin](#func-columnjoin)
 [GetBitAtIndex](#func-getbitatindex)
+[Join](#func-join)
 [LastIndex](#func-lastindex)
 [SplitAt](#func-splitat)
 
@@ -60,17 +62,19 @@ Finds the bit at index `ind` of binary `b`.
 
 Splits the binary in two at the index, returns the 2 sub-binaries
 
-### Join
+### func Join
 
-`func Join(bs []uint, sep uint)`
+`func Join(bs []Unit, sep Unit) uint`
 
 Join combines the binary values into one, separated by the given delimiter
 
-`func ColumnJoin(rows []uint, colLen int)`
+### func ColumnJoin
+
+`func ColumnJoin(rows []uint, colLeng int)`
 
 ColumnJoin combines the binary values in each corresponding bit position, forming array of columns
 
-colLen is usually the bit length of an element in rows, but since leading zeroes are ommited, user needs to specify the bit length
+colLeng is usually the bit length of an element in rows, but since leading zeroes are ommited and in case of variable length binaries in input, user needs to specify the bit length
 
 ### Trim
 
