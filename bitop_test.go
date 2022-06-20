@@ -380,9 +380,27 @@ func TestJoin(t *testing.T) {
 	}{
 		{
 			name:     "ones",
-			bs:       []Unit{NewUnit(0b111111, -1)},
+			bs:       []Unit{NewUnit(0b111111, -1), NewUnit(0b11, -1)},
 			sep:      NewUnit(0b0, 0),
-			expected: 0b111111,
+			expected: 0b11111111,
+		},
+		{
+			name:     "zeroes",
+			bs:       []Unit{NewUnit(0b00, 2), NewUnit(0b000, 3)},
+			sep:      NewUnit(0b0, 0),
+			expected: 0b00000,
+		},
+		{
+			name:     "single separator 0b1",
+			bs:       []Unit{NewUnit(0b00, 2), NewUnit(0b000, 3)},
+			sep:      NewUnit(0b1, 0),
+			expected: 0b001000,
+		},
+		{
+			name:     "multiple separator 0b1",
+			bs:       []Unit{NewUnit(0b1011, -1), NewUnit(0b101, -1), NewUnit(0b111, -1), NewUnit(0b0000, 4)},
+			sep:      NewUnit(0b0, 1),
+			expected: 0b10110101011100000,
 		},
 	} {
 		tc := tc
