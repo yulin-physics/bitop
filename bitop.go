@@ -110,11 +110,11 @@ func Join(bs []Unit, sep Unit) uint {
 }
 
 // ColumnJoin joins the binary values in each corresponding bit position to form columns
-func ColumnJoin(rows []uint, colLen int) []uint {
-	cols := make([]uint, colLen)
-	for i := 1; i <= colLen; i++ {
+func ColumnJoin(rows []uint, colLeng int) []uint {
+	cols := make([]uint, colLeng)
+	for i := 1; i <= colLeng; i++ {
 		for j := 0; j < len(rows); j++ {
-			cols[i-1] = cols[i-1]<<1 | rows[j]>>(colLen-i)&1
+			cols[i-1] = cols[i-1]<<1 | rows[j]>>(colLeng-i)&1
 		}
 	}
 	return cols
