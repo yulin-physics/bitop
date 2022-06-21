@@ -12,12 +12,17 @@ Types:
 
 Functions:
 
+[ClearFromRight](#func-clearfromright)
 [Contains](#func-contains)
 [ColumnJoin](#func-columnjoin)
 [GetBitAtIndex](#func-getbitatindex)
 [Join](#func-join)
 [LastIndex](#func-lastindex)
+[RemoveBit](#func-removebit)
+[Repeat](#func-repeat)
 [SplitAt](#func-splitat)
+[TruncateFromLeft](#func-truncatefromleft)
+[TruncateFromRight](#func-truncatefromright)
 
 ## Types
 
@@ -42,7 +47,7 @@ Checks the target binary `b` has at least one part that matches the sub-binary v
 
 `func IsPalindrome(b uint, leng int) bool`
 
-Returns true if the binary contains symmetry
+Returns true if the binary contains symmetry.
 
 ### func LastIndex
 
@@ -60,43 +65,51 @@ Finds the bit at index `ind` of binary `b`.
 
 `func SplitAt(b Unit, index int) []uint`
 
-Splits the binary in two at the index, returns the 2 sub-binaries
+Splits the binary in two at the index, returns the 2 sub-binaries.
 
 ### func Join
 
 `func Join(bs []Unit, sep Unit) uint`
 
-Join combines the binary values into one, separated by the given delimiter
+Join combines the binary values into one, separated by the given delimiter.
 
 ### func ColumnJoin
 
 `func ColumnJoin(rows []uint, colLeng int)`
 
-ColumnJoin combines the binary values in each corresponding bit position, forming array of columns
+ColumnJoin combines the binary values in each corresponding bit position, forming array of columns.
 
-colLeng is usually the bit length of an element in rows, but since leading zeroes are ommited and in case of variable length binaries in input, user needs to specify the bit length
+colLeng is usually the bit length of an element in rows, but since leading zeroes are ommited and in case of variable length binaries in input, user needs to specify the bit length.
 
-### Trim
+### func TruncateFromRight
 
-`func TruncateFromRight(b uint, index int) `
+`func TruncateFromRight(b uint, pos int) uint`
 
-`func TruncateFromLeft(b uint, index int)`
+TruncateFromRight trims off bits from right, up to but not including the index.
 
-Truncate functions trim off bits from left (or right), up to but not including the index
+### func TruncateFromLeft
 
-`func ClearFromRight(b uint, index int) `
+`func TruncateFromLeft(b Unit, ind int) uint`
 
-Clear preserves the binary length and resets the bits from right to zero, up to but not including the index
+TruncateFromLeft trims off bits from left, up to but not including the index.
 
-`func RemoveBit(b uint, index int)`
+### func ClearFromRight
 
-RemoveBit removes the bit at the index from the binary
+`func ClearFromRight(b Unit, ind int) uint`
 
-### Repeat
+Clear preserves the binary length and resets the bits from right to zero, up to but not including the index.
+
+### func RemoveBit
+
+`func RemoveBit(b Unit, index int) uint`
+
+RemoveBit removes the bit at the index from the binary.
+
+### func Repeat
 
 `func Repeat(b uint, leng int, count int)`
 
-Repeat constructs a binary based on a given repeating bit pattern
+Repeat constructs a binary based on a given repeating bit pattern.
 
 ### Replace
 
