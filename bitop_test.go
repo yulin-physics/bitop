@@ -460,6 +460,50 @@ func TestColumnJoin(t *testing.T) {
 	}
 }
 
+func TestRepeat(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		b        Unit
+		count    int
+		expected uint
+	}{
+		{
+			name:     "ones",
+			b:        NewUnit(0b111111, -1),
+			count:    2,
+			expected: 0b111111111111,
+		},
+		{
+			name:     "zeroes",
+			b:        NewUnit(0b0000, 4),
+			count:    0,
+			expected: 0b0,
+		},
+		{
+			name:     "010101",
+			b:        NewUnit(0b010101, 6),
+			count:    0,
+			expected: 0b0,
+		},
+		{
+			name:     "1001",
+			b:        NewUnit(0b1001, -1),
+			count:    1,
+			expected: 0b1001,
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := Repeat(tc.b, tc.count)
+			if result != tc.expected {
+				t.Fatalf("[TestRepeat][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+			}
+		})
+	}
+}
+
 func TestIsPalindrome(t *testing.T) {
 	t.Parallel()
 	for _, tc := range []struct {
