@@ -120,14 +120,11 @@ func ColumnJoin(rows []uint, colLeng int) []uint {
 	return cols
 }
 
-// Repeat returns a binary that is a repetition of the given bit pattern `b`, with length of the repeated unit `leng` (since leading zeroes would be ignored otherwise, parse -1 for leng if length unknown) and number of repetitions `count`
-func Repeat(b uint, count int, leng int) uint {
-	if leng < 0 {
-		leng = bits.Len(b)
-	}
+// Repeat returns a binary that is a repetition of the given bit pattern `b` and number of repetitions `count`
+func Repeat(b Unit, count int) uint {
 	combined := uint(0)
 	for i := 0; i < count; i++ {
-		combined = combined<<leng | b
+		combined = combined<<b.leng | b.value
 	}
 	return combined
 }
