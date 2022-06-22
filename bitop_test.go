@@ -530,6 +530,22 @@ func TestReplace(t *testing.T) {
 			n:        2,
 			expected: 0b110000,
 		},
+		{
+			name:     "no match",
+			b:        NewUnit(0b000000, 6),
+			old:      NewUnit(0b1, 1),
+			new:      NewUnit(0b0, 1),
+			n:        2,
+			expected: 0b000000,
+		},
+		{
+			name:     "complex match",
+			b:        NewUnit(0b1010101, -1),
+			old:      NewUnit(0b101, -1),
+			new:      NewUnit(0b1, 1),
+			n:        3,
+			expected: 0b101,
+		},
 	} {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
