@@ -504,6 +504,44 @@ func TestRepeat(t *testing.T) {
 	}
 }
 
+func TestReplace(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		b        Unit
+		old      Unit
+		new      Unit
+		n        int
+		expected uint
+	}{
+		{
+			name:     "ones",
+			b:        NewUnit(0b111111, -1),
+			old:      NewUnit(0b1, -1),
+			new:      NewUnit(0b0, -1),
+			n:        2,
+			expected: 0b1111,
+		},
+		{
+			name:     "zeros",
+			b:        NewUnit(0b000000, 6),
+			old:      NewUnit(0b0, 1),
+			new:      NewUnit(0b1, 1),
+			n:        2,
+			expected: 0b110000,
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := Replace(tc.b, tc.old, tc.new, tc.n)
+			if result != tc.expected {
+				t.Fatalf("[TestReplace][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+			}
+		})
+	}
+}
+
 func TestIsPalindrome(t *testing.T) {
 	t.Parallel()
 	for _, tc := range []struct {
