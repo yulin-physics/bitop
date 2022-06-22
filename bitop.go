@@ -130,29 +130,23 @@ func Repeat(b Unit, count int) uint {
 }
 
 // Replace returns a binary with any old bit pattern replaced by new, up to n times of occurrences
-// leng, oldLeng, newLeng are optional properties for b, old, new, to account for leading zeroes
-func Replace(b uint, old uint, new uint, n int, leng int, oldLeng int, newLeng int) uint {
-	if leng < 0 {
-		leng = bits.Len(b)
+func Replace(b Unit, old Unit, new Unit, n int) uint {
+	if n < 0 {
+		return b.value
 	}
-	if oldLeng < 0 {
-		oldLeng = bits.Len(old)
-	}
-	if newLeng < 0 {
-		newLeng = bits.Len(new)
-	}
+
 	result := uint(0)
-	for i := 0; i < leng; {
-		// window := TruncateFromLeft(b, i, leng)
-		// window = TruncateFromRight(window, leng-i-oldLeng)
-		// if window == old && n > 0 {
-		// 	result = result<<newLeng | new
-		// 	n--
-		// 	i += oldLeng
-		// } else {
-		// 	result = result<<1 | GetBitAtIndex(b, i, leng)
-		// 	i++
-		// }
+	for i := 0; i < b.leng; {
+		window := TruncateFromLeft(b, i)
+		window = TruncateFromRight(window, b.leng-i-old.leng)
+		if window == old.value && n > 0 {
+			result = result<<new.leng | new.value
+			n--
+			i += old.leng
+		} else {
+			result = result<<1 | GetBitAtIndex(b, i)
+			i++
+		}
 	}
 	return result
 }

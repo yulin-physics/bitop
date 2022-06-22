@@ -20,6 +20,7 @@ Functions:
 [LastIndex](#func-lastindex)
 [RemoveBit](#func-removebit)
 [Repeat](#func-repeat)
+[Replace](#func-replace)
 [SplitAt](#func-splitat)
 [TruncateFromLeft](#func-truncatefromleft)
 [TruncateFromRight](#func-truncatefromright)
@@ -111,9 +112,9 @@ RemoveBit removes the bit at the index from the binary.
 
 Repeat constructs a binary based on a given repeating bit pattern.
 
-### Replace
+### func Replace
 
-`func Replace(b uint, old uint, new uint, n int, leng int, oldLeng int, newLeng int)`
+`func Replace(b Unit, old Unit, new Unit, n int) uint`
 
 Replace constructs a new binary with the old sub bits replaced by the new up to n times
 
