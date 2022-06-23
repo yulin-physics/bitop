@@ -558,6 +558,78 @@ func TestReplace(t *testing.T) {
 	}
 }
 
+func TestFlipAtIndex(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		b        Unit
+		index    int
+		expected uint
+	}{
+		{
+			name:     "ones",
+			b:        NewUnit(0b111111, -1),
+			index:    2,
+			expected: 0b110111,
+		},
+		{
+			name:     "zeroes",
+			b:        NewUnit(0b000000, 6),
+			index:    3,
+			expected: 0b000100,
+		},
+		{
+			name:     "mixed",
+			b:        NewUnit(0b01100101, 8),
+			index:    0,
+			expected: 0b11100101,
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := FlipAtIndex(tc.b, tc.index)
+			if result != tc.expected {
+				t.Fatalf("[TestFlipAtIndex][%s]: Got %02b, expected %02b", tc.name, result, tc.expected)
+			}
+		})
+	}
+}
+
+func TestFlip(t *testing.T) {
+	t.Parallel()
+	for _, tc := range []struct {
+		name     string
+		b        Unit
+		expected uint
+	}{
+		{
+			name:     "ones",
+			b:        NewUnit(0b111111, -1),
+			expected: 0b000000,
+		},
+		{
+			name:     "zeroes",
+			b:        NewUnit(0b000000, 6),
+			expected: 0b111111,
+		},
+		{
+			name:     "mixed",
+			b:        NewUnit(0b01100101, 8),
+			expected: 0b10011010,
+		},
+	} {
+		tc := tc
+		t.Run(tc.name, func(t *testing.T) {
+			t.Parallel()
+			result := Flip(tc.b)
+			if result != tc.expected {
+				t.Fatalf("[TestFlip][%s]: Got %02b, expected %02b", tc.name, result, tc.expected)
+			}
+		})
+	}
+}
+
 func TestIsPalindrome(t *testing.T) {
 	t.Parallel()
 	for _, tc := range []struct {
