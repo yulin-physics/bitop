@@ -160,14 +160,10 @@ func FlipAtIndex(b Unit, index int) uint {
 }
 
 // Flip returns a binary with all bits flipped
-// leng is an optional input for number of bits in the binary, to account for leading zeroes (set as -1 to omit)
-func Flip(b uint, leng int) uint {
-	if leng < 0 {
-		leng = bits.Len(b)
-	}
+func Flip(b Unit) uint {
 	result := uint(0)
-	for i := leng - 1; i >= 0; i-- {
-		result = result<<1 | (1 ^ b>>i&1)
+	for i := b.leng - 1; i >= 0; i-- {
+		result = result<<1 | (1 ^ b.value>>i&1)
 	}
 	return result
 }
