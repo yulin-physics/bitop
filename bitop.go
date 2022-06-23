@@ -156,7 +156,7 @@ func FlipAtIndex(b Unit, index int) uint {
 	if index < 0 {
 		return b.value
 	}
-	return b.value | 1<<uint(b.leng-index-1)
+	return b.value ^ 1<<uint(b.leng-index-1)
 }
 
 // Flip returns a binary with all bits flipped
