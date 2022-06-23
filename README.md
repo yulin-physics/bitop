@@ -15,6 +15,8 @@ Functions:
 [ClearFromRight](#func-clearfromright)
 [Contains](#func-contains)
 [ColumnJoin](#func-columnjoin)
+[Flip](#func-flip)
+[FlipAtIndex](#func-flipatindex)
 [GetBitAtIndex](#func-getbitatindex)
 [Join](#func-join)
 [LastIndex](#func-lastindex)
@@ -118,15 +120,17 @@ Repeat constructs a binary based on a given repeating bit pattern.
 
 Replace constructs a new binary with the old sub bits replaced by the new up to n times
 
-## Flip
-
-`func FlipAtIndex(b uint, index int, leng int)`
-
-Flips the bit at index i in the binary
+### func Flip
 
 `func Flip(b uint, leng int)`
 
 Flips all bits
+
+### func FlipAtIndex
+
+`func FlipAtIndex(b uint, index int, leng int)`
+
+Flips the bit at index i in the binary
 
 ## Reverse
 
