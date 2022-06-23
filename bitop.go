@@ -152,15 +152,11 @@ func Replace(b Unit, old Unit, new Unit, n int) uint {
 }
 
 // FlipAtIndex flips the bit at index i in the binary
-// leng is an optional input for number of bits in the binary, to account for leading zeroes (set as -1 to omit)
-func FlipAtIndex(b uint, index int, leng int) uint {
+func FlipAtIndex(b Unit, index int) uint {
 	if index < 0 {
-		return b
+		return b.value
 	}
-	if leng < 0 {
-		leng = bits.Len(b)
-	}
-	return b | 1<<uint(leng-index-1)
+	return b.value | 1<<uint(b.leng-index-1)
 }
 
 // Flip returns a binary with all bits flipped
