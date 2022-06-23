@@ -572,6 +572,18 @@ func TestFlipAtIndex(t *testing.T) {
 			index:    2,
 			expected: 0b110111,
 		},
+		{
+			name:     "zeroes",
+			b:        NewUnit(0b000000, 6),
+			index:    3,
+			expected: 0b000100,
+		},
+		{
+			name:     "mixed",
+			b:        NewUnit(0b01100101, 8),
+			index:    0,
+			expected: 0b11100101,
+		},
 	} {
 		tc := tc
 		t.Run(tc.name, func(t *testing.T) {
