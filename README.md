@@ -76,7 +76,7 @@ Join combines the binary values into one, separated by the given delimiter.
 
 ### func ColumnJoin
 
-`func ColumnJoin(rows []uint, colLeng int)`
+`func ColumnJoin(rows []uint, colLeng int) []uint`
 
 ColumnJoin combines the binary values in each corresponding bit position, forming array of columns.
 
@@ -108,7 +108,7 @@ RemoveBit removes the bit at the index from the binary.
 
 ### func Repeat
 
-`func Repeat(b Unit, count int)`
+`func Repeat(b Unit, count int) uint`
 
 Repeat constructs a binary based on a given repeating bit pattern.
 
@@ -120,19 +120,19 @@ Replace constructs a new binary with the old sub bits replaced by the new up to 
 
 ### func Flip
 
-`func Flip(b Unit)`
+`func Flip(b Unit) uint`
 
 Flips all bits.
 
 ### func FlipAtIndex
 
-`func FlipAtIndex(b Unit, index int)`
+`func FlipAtIndex(b Unit, index int) uint`
 
 Flips the bit at index i in the binary.
 
 ### func Reverse
 
-`func Reverse(b Unit)`
+`func Reverse(b Unit) uint`
 
 Returns bits in reversed order.
 
