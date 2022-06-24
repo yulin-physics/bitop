@@ -49,10 +49,6 @@ type Unit struct {
 
 Checks the target binary `b` has at least one part that matches the sub-binary value.
 
-`func IsPalindrome(b uint, leng int) bool`
-
-Returns true if the binary contains symmetry.
-
 ### func LastIndex
 
 `func LastIndex(b, sub Unit) int`
@@ -111,7 +107,7 @@ RemoveBit removes the bit at the index from the binary.
 
 ### func Repeat
 
-`func Repeat(b uint, leng int, count int)`
+`func Repeat(b Unit, count int)`
 
 Repeat constructs a binary based on a given repeating bit pattern.
 
@@ -119,25 +115,31 @@ Repeat constructs a binary based on a given repeating bit pattern.
 
 `func Replace(b Unit, old Unit, new Unit, n int) uint`
 
-Replace constructs a new binary with the old sub bits replaced by the new up to n times
+Replace constructs a new binary with the old sub bits replaced by the new up to n times.
 
 ### func Flip
 
-`func Flip(b uint, leng int)`
+`func Flip(b Unit)`
 
-Flips all bits
+Flips all bits.
 
 ### func FlipAtIndex
 
-`func FlipAtIndex(b uint, index int, leng int)`
+`func FlipAtIndex(b Unit, index int)`
 
-Flips the bit at index i in the binary
+Flips the bit at index i in the binary.
 
-## func Reverse
+### func Reverse
 
-`func Reverse(b uint, leng int)`
+`func Reverse(b Unit)`
 
-Returns bits in reversed order
+Returns bits in reversed order.
+
+### func isPalindrome
+
+`func IsPalindrome(b Unit) bool`
+
+Returns true if the binary contains symmetry.
 
 ## Resources
 
