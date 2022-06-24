@@ -18,6 +18,7 @@ Functions:
 [Flip](#func-flip)
 [FlipAtIndex](#func-flipatindex)
 [GetBitAtIndex](#func-getbitatindex)
+[isPalindrome](#func-ispalindrome)
 [Join](#func-join)
 [LastIndex](#func-lastindex)
 [RemoveBit](#func-removebit)
