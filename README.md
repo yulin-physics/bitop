@@ -23,6 +23,7 @@ Functions:
 [RemoveBit](#func-removebit)
 [Repeat](#func-repeat)
 [Replace](#func-replace)
+[Reverse](#func-reverse)
 [SplitAt](#func-splitat)
 [TruncateFromLeft](#func-truncatefromleft)
 [TruncateFromRight](#func-truncatefromright)
@@ -132,7 +133,7 @@ Flips all bits
 
 Flips the bit at index i in the binary
 
-## Reverse
+## func Reverse
 
 `func Reverse(b uint, leng int)`
 
