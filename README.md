@@ -18,7 +18,7 @@ Functions:
 [Flip](#func-flip)
 [FlipAtIndex](#func-flipatindex)
 [GetBitAtIndex](#func-getbitatindex)
-[isPalindrome](#func-ispalindrome)
+[IsPalindrome](#func-ispalindrome)
 [Join](#func-join)
 [LastIndex](#func-lastindex)
 [RemoveBit](#func-removebit)
@@ -136,7 +136,7 @@ Flips the bit at index i in the binary.
 
 Returns bits in reversed order.
 
-### func isPalindrome
+### func IsPalindrome
 
 `func IsPalindrome(b Unit) bool`
 
