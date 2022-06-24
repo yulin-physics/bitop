@@ -18,11 +18,13 @@ Functions:
 [Flip](#func-flip)
 [FlipAtIndex](#func-flipatindex)
 [GetBitAtIndex](#func-getbitatindex)
+[IsPalindrome](#func-ispalindrome)
 [Join](#func-join)
 [LastIndex](#func-lastindex)
 [RemoveBit](#func-removebit)
 [Repeat](#func-repeat)
 [Replace](#func-replace)
+[Reverse](#func-reverse)
 [SplitAt](#func-splitat)
 [TruncateFromLeft](#func-truncatefromleft)
 [TruncateFromRight](#func-truncatefromright)
@@ -47,10 +49,6 @@ type Unit struct {
 `func Contains(b, sub Unit) bool`
 
 Checks the target binary `b` has at least one part that matches the sub-binary value.
-
-`func IsPalindrome(b uint, leng int) bool`
-
-Returns true if the binary contains symmetry.
 
 ### func LastIndex
 
@@ -78,7 +76,7 @@ Join combines the binary values into one, separated by the given delimiter.
 
 ### func ColumnJoin
 
-`func ColumnJoin(rows []uint, colLeng int)`
+`func ColumnJoin(rows []uint, colLeng int) []uint`
 
 ColumnJoin combines the binary values in each corresponding bit position, forming array of columns.
 
@@ -110,7 +108,7 @@ RemoveBit removes the bit at the index from the binary.
 
 ### func Repeat
 
-`func Repeat(b uint, leng int, count int)`
+`func Repeat(b Unit, count int) uint`
 
 Repeat constructs a binary based on a given repeating bit pattern.
 
@@ -118,25 +116,31 @@ Repeat constructs a binary based on a given repeating bit pattern.
 
 `func Replace(b Unit, old Unit, new Unit, n int) uint`
 
-Replace constructs a new binary with the old sub bits replaced by the new up to n times
+Replace constructs a new binary with the old sub bits replaced by the new up to n times.
 
 ### func Flip
 
-`func Flip(b uint, leng int)`
+`func Flip(b Unit) uint`
 
-Flips all bits
+Flips all bits.
 
 ### func FlipAtIndex
 
-`func FlipAtIndex(b uint, index int, leng int)`
+`func FlipAtIndex(b Unit, index int) uint`
 
-Flips the bit at index i in the binary
+Flips the bit at index i in the binary.
 
-## Reverse
+### func Reverse
 
-`func Reverse(b uint, leng int)`
+`func Reverse(b Unit) uint`
 
-Returns bits in reversed order
+Returns bits in reversed order.
+
+### func IsPalindrome
+
+`func IsPalindrome(b Unit) bool`
+
+Returns true if the binary contains symmetry.
 
 ## Resources
 

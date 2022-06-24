@@ -169,27 +169,19 @@ func Flip(b Unit) uint {
 }
 
 // Reverse returns a binary with bits in reversed order
-// leng is an optional input for number of bits in the binary, to account for leading zeroes (set as -1 to omit)
-func Reverse(b uint, leng int) uint {
-	if leng < 0 {
-		leng = bits.Len(b)
-	}
+func Reverse(b Unit) uint {
 	reversed := uint(0)
-	for i := 0; i < leng; i++ {
-		reversed = reversed<<1 | b>>i&1
+	for i := 0; i < b.leng; i++ {
+		reversed = reversed<<1 | b.value>>i&1
 	}
 	return reversed
 }
 
 // IsPalindrome checks if the binary is symmetrical
-// leng is an optional input for number of bits in the binary (set as -1 to omit)
-func IsPalindrome(b uint, leng int) bool {
-	if leng < 0 {
-		leng = bits.Len(b)
-	}
+func IsPalindrome(b Unit) bool {
 	inverse := uint(0)
-	for i := 0; i < leng; i++ {
-		inverse = inverse<<1 | b>>i&1
+	for i := 0; i < b.leng; i++ {
+		inverse = inverse<<1 | b.value>>i&1
 	}
-	return inverse == b
+	return inverse == b.value
 }
