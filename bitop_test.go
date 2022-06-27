@@ -98,7 +98,7 @@ func TestLastIndex(t *testing.T) {
 			t.Parallel()
 			result := LastIndex(tc.b, tc.sub)
 			if result != tc.expected {
-				t.Fatalf("[TestLastIndex][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+				t.Fatalf("[TestLastIndex][%s]: Got %02b, expected %02b", tc.name, result, tc.expected)
 			}
 		})
 	}
@@ -142,7 +142,7 @@ func TestGetBitAtIndex(t *testing.T) {
 			t.Parallel()
 			result := GetBitAtIndex(tc.b, tc.index)
 			if result != tc.expected {
-				t.Fatalf("[TestGetBitAtIndex][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+				t.Fatalf("[TestGetBitAtIndex][%s]: Got %02b, expected %02b", tc.name, result, tc.expected)
 			}
 		})
 	}
@@ -187,7 +187,7 @@ func TestSplitAt(t *testing.T) {
 			result := SplitAt(tc.b, tc.index)
 			for i, r := range result {
 				if r != tc.expected[i] {
-					t.Fatalf("[TestSplitAt][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+					t.Fatalf("[TestSplitAt][%s]: Got %02b, expected %02b", tc.name, result, tc.expected)
 				}
 			}
 		})
@@ -232,7 +232,7 @@ func TestTruncateFromRight(t *testing.T) {
 			t.Parallel()
 			result := TruncateFromRight(tc.b, tc.pos)
 			if result != tc.expected {
-				t.Fatalf("[TestTruncateFromRight][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+				t.Fatalf("[TestTruncateFromRight][%s]: Got %02b, expected %02b", tc.name, result, tc.expected)
 			}
 		})
 	}
@@ -276,7 +276,7 @@ func TestTruncateFromLeft(t *testing.T) {
 			t.Parallel()
 			result := TruncateFromLeft(tc.b, tc.index)
 			if result != tc.expected {
-				t.Fatalf("[TestTruncateFromLeft][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+				t.Fatalf("[TestTruncateFromLeft][%s]: Got %02b, expected %02b", tc.name, result, tc.expected)
 			}
 		})
 	}
@@ -320,7 +320,7 @@ func TestClearFromRight(t *testing.T) {
 			t.Parallel()
 			result := ClearFromRight(tc.b, tc.index)
 			if result != tc.expected {
-				t.Fatalf("[TestClearFromRight][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+				t.Fatalf("[TestClearFromRight][%s]: Got %02b, expected %02b", tc.name, result, tc.expected)
 			}
 		})
 	}
@@ -364,7 +364,7 @@ func TestRemoveBit(t *testing.T) {
 			t.Parallel()
 			result := RemoveBit(tc.b, tc.index)
 			if result != tc.expected {
-				t.Fatalf("[TestRemoveBit][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+				t.Fatalf("[TestRemoveBit][%s]: Got %02b, expected %02b", tc.name, result, tc.expected)
 			}
 		})
 	}
@@ -408,7 +408,7 @@ func TestJoin(t *testing.T) {
 			t.Parallel()
 			result := Join(tc.bs, tc.sep)
 			if result != tc.expected {
-				t.Fatalf("[TestJoin][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+				t.Fatalf("[TestJoin][%s]: Got %02b, expected %02b", tc.name, result, tc.expected)
 			}
 		})
 	}
@@ -453,7 +453,7 @@ func TestColumnJoin(t *testing.T) {
 			result := ColumnJoin(tc.rows, tc.colLeng)
 			for i, r := range result {
 				if r != tc.expected[i] {
-					t.Fatalf("[TestColumnJoin][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+					t.Fatalf("[TestColumnJoin][%s]: Got %02b, expected %02b", tc.name, result, tc.expected)
 				}
 			}
 		})
@@ -498,7 +498,7 @@ func TestRepeat(t *testing.T) {
 			t.Parallel()
 			result := Repeat(tc.b, tc.count)
 			if result != tc.expected {
-				t.Fatalf("[TestRepeat][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+				t.Fatalf("[TestRepeat][%s]: Got %02b, expected %02b", tc.name, result, tc.expected)
 			}
 		})
 	}
@@ -552,7 +552,7 @@ func TestReplace(t *testing.T) {
 			t.Parallel()
 			result := Replace(tc.b, tc.old, tc.new, tc.n)
 			if result != tc.expected {
-				t.Fatalf("[TestReplace][%s]: Got %v, expected %v", tc.name, result, tc.expected)
+				t.Fatalf("[TestReplace][%s]: Got %02b, expected %02b", tc.name, result, tc.expected)
 			}
 		})
 	}
