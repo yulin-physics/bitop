@@ -64,7 +64,7 @@ Finds the bit at index `ind` of binary `b`.
 
 ### func SplitAt
 
-`func SplitAt(b Unit, index int) []uint`
+`func SplitAt(b Unit, ind int) []uint`
 
 Splits the binary in two at the index, returns the 2 sub-binaries.
 
@@ -102,7 +102,7 @@ Clear preserves the binary length and resets the bits from right to zero, up to 
 
 ### func RemoveBit
 
-`func RemoveBit(b Unit, index int) uint`
+`func RemoveBit(b Unit, ind int) uint`
 
 RemoveBit removes the bit at the index from the binary.
 
@@ -126,9 +126,9 @@ Flips all bits.
 
 ### func FlipAtIndex
 
-`func FlipAtIndex(b Unit, index int) uint`
+`func FlipAtIndex(b Unit, ind int) uint`
 
-Flips the bit at index i in the binary.
+Flips the bit at index `ind` in the binary.
 
 ### func Reverse
 
@@ -141,8 +141,3 @@ Returns bits in reversed order.
 `func IsPalindrome(b Unit) bool`
 
 Returns true if the binary contains symmetry.
-
-## Resources
-
-- [How to Use a Private Go Module in Your Own Project](https://www.digitalocean.com/community/tutorials/how-to-use-a-private-go-module-in-your-own-project)
-- [Publishing Go Modules](https://go.dev/blog/publishing-go-modules)

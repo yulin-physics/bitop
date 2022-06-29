@@ -10,7 +10,7 @@ type Unit struct {
 	leng  int
 }
 
-// NewUnit returns a new unit type required by all functions
+// NewUnit returns a new unit type required by most functions
 // Give -ve leng to take default length measure of the input binary, which omits leading zeros
 func NewUnit(b uint, leng int) Unit {
 	if leng < 0 {
@@ -19,7 +19,7 @@ func NewUnit(b uint, leng int) Unit {
 	return Unit{value: b, leng: leng}
 }
 
-// Contains returns true if the binary has at least one bit that is 0b1
+// Contains returns true if the binary `b` has at least one section that matches with binary `sub`
 func Contains(b, sub Unit) bool {
 	for i := 0; i <= b.leng-sub.leng; i++ {
 		window := TruncateFromLeft(b, i)
@@ -51,7 +51,7 @@ func GetBitAtIndex(b Unit, ind int) uint {
 	return b.value >> uint(b.leng-ind-1) & 1
 }
 
-// SplitAt returns the binary argument in two halves at the index specified [0, index)
+// SplitAt returns the binary argument in two halves at the index specified [0, ind)
 func SplitAt(b Unit, ind int) []uint {
 	if ind < 0 {
 		return []uint{b.value}
@@ -60,7 +60,7 @@ func SplitAt(b Unit, ind int) []uint {
 	return []uint{firstHalf, b.value ^ (firstHalf << (b.leng - ind))}
 }
 
-// TruncateFromRight returns the binary truncated up to the index from the right, exclusive of the index
+// TruncateFromRight returns the binary truncated up to the index from the right, exclusive of the index `ind`
 func TruncateFromRight(b uint, pos int) uint {
 	if pos < 0 {
 		return b
@@ -68,7 +68,7 @@ func TruncateFromRight(b uint, pos int) uint {
 	return b >> pos
 }
 
-// ClearFromRight returns the binary bits set to zero up to the index from the right, exclusive of the index
+// ClearFromRight returns the binary bits set to zero up to the index from the right, exclusive of the index `ind`
 func ClearFromRight(b Unit, ind int) uint {
 	if ind < 0 {
 		return b.value
@@ -76,7 +76,7 @@ func ClearFromRight(b Unit, ind int) uint {
 	return b.value &^ (1<<ind - 1)
 }
 
-// TruncateFromLeft returns binary truncated up to the index from the left, exclusive of the index
+// TruncateFromLeft returns binary truncated up to the index from the left, exclusive of the index `ind`
 func TruncateFromLeft(b Unit, ind int) uint {
 	if ind < 0 {
 		return b.value
@@ -85,10 +85,10 @@ func TruncateFromLeft(b Unit, ind int) uint {
 }
 
 // RemoveBit returns the binary with the bit at index removed, length of the binary decreases by one
-func RemoveBit(b Unit, index int) uint {
+func RemoveBit(b Unit, ind int) uint {
 	new := uint(0)
 	for i := 0; i < b.leng; i++ {
-		if i == index {
+		if i == ind {
 			continue
 		}
 		new = new<<1 | b.value>>(b.leng-i-1)&1
@@ -109,7 +109,7 @@ func Join(bs []Unit, sep Unit) uint {
 	return joined
 }
 
-// ColumnJoin joins the binary values in each corresponding bit position to form columns
+// ColumnJoin joins the binary values in the array at each corresponding bit position to form columns
 func ColumnJoin(rows []uint, colLeng int) []uint {
 	cols := make([]uint, colLeng)
 	for i := 1; i <= colLeng; i++ {
@@ -120,7 +120,7 @@ func ColumnJoin(rows []uint, colLeng int) []uint {
 	return cols
 }
 
-// Repeat returns a binary that is a repetition of the given bit pattern `b` and number of repetitions `count`
+// Repeat returns a binary that is a repetition of the given bit pattern for `count` number of repetitions
 func Repeat(b Unit, count int) uint {
 	combined := uint(0)
 	for i := 0; i < count; i++ {
@@ -151,12 +151,12 @@ func Replace(b Unit, old Unit, new Unit, n int) uint {
 	return result
 }
 
-// FlipAtIndex flips the bit at index i in the binary
-func FlipAtIndex(b Unit, index int) uint {
-	if index < 0 {
+// FlipAtIndex flips the bit at the specified index in the binary
+func FlipAtIndex(b Unit, ind int) uint {
+	if ind < 0 {
 		return b.value
 	}
-	return b.value ^ 1<<uint(b.leng-index-1)
+	return b.value ^ 1<<uint(b.leng-ind-1)
 }
 
 // Flip returns a binary with all bits flipped
